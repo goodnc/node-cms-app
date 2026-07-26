@@ -66,18 +66,18 @@
             </div>
           </div>
         </div>
-      </div>
-      <div
-        id="msg-username"
-        class="alert alert-warning alert-dismissable"
-        role="alert">
-        <button class="close" type="button">×</button>请输入用户名
-      </div>
-      <div
-        id="msg-password"
-        class="alert alert-warning alert-dismissable"
-        role="alert">
-        <button class="close" type="button">×</button>请输入密码
+        <div
+          id="msg-username"
+          class="alert alert-warning alert-dismissable"
+          role="alert">
+          <button class="close" type="button">×</button>请输入用户名
+        </div>
+        <div
+          id="msg-password"
+          class="alert alert-warning alert-dismissable"
+          role="alert">
+          <button class="close" type="button">×</button>请输入密码
+        </div>
       </div>
     </div>
     <script src="/assets/js/lib/jquery.min.js"></script>
