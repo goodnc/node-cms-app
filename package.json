@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "art-template": "^4.13.4",
+    "config": "^4.4.2",
     "express": "^5.2.1",
     "express-art-template": "^1.0.1",
     "mongoose": "^9.8.0"
   },
   "devDependencies": {
+    "@types/config": "^4.4.0",
     "@types/express": "^5.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^26.1.1",
