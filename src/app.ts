@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import path from "path";
 
 import home from "./controllers/home-controller";
 import article from "./controllers/article-controller";
@@ -6,6 +7,7 @@ import user from "./controllers/user-controller";
 import login from "./controllers/login-controller";
 
 const app: Application = express();
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", home);
 app.use("/article", article);
