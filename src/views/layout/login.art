@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>登录注册</title>
+
+    <!-- Styles -->
+    <link
+      href="/assets/fontAwesome/css/fontawesome-all.min.css"
+      rel="stylesheet" />
+    <link href="/assets/css/lib/themify-icons.css" rel="stylesheet" />
+    <link href="/assets/css/lib/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/css/lib/nixon.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-primary">
+    <div class="Nixon-login">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <div class="login-content">
+              <div class="login-logo">
+                <a href="/"
+                  ><span>{{ title }}</span></a
+                >
+              </div>
+              <div class="login-form">
+                <h4>后台登录</h4>
+                <form action="/login" method="post" id="loginForm">
+                  <div class="form-group">
+                    <label>用户名</label>
+                    <input
+                      type="text"
+                      name="username"
+                      class="form-control"
+                      placeholder="请输入用户名" />
+                  </div>
+                  <div class="form-group">
+                    <label>密码</label>
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="请输入密码" />
+                  </div>
+                  <div class="checkbox">
+                    <label> <input type="checkbox" /> 记住我 </label>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-flat m-b-30 m-t-30">
+                    登录
+                  </button>
+                  <div class="register-link m-t-15 text-center">
+                    <p>
+                      还没有账号？
+                      <a href="/register"> 注册</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="msg-username"
+        class="alert alert-warning alert-dismissable"
+        role="alert">
+        <button class="close" type="button">×</button>请输入用户名
+      </div>
+      <div
+        id="msg-password"
+        class="alert alert-warning alert-dismissable"
+        role="alert">
+        <button class="close" type="button">×</button>请输入密码
+      </div>
+    </div>
+    <script src="/assets/js/lib/jquery.min.js"></script>
+    <script src="/assets/js/lib/bootstrap.min.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script>
+      //监听表单提交事件
+      $("#loginForm").on("submit", function () {
+        // 获取表单中输入的内容
+        var result = serializeToJson($(this));
+        if (result.username.trim().length == 0) {
+          $("#msg-username").show();
+          return false;
+        }
+        $("#msg-username").hide();
+        if (result.password.trim().length == 0) {
+          $("#msg-password").show();
+          return false;
+        }
+        $("#msg-password").hide();
+      });
+
+      // 监听关闭提示框
+      $(".close").click(function () {
+        $(".alert").alert("close");
+      });
+    </script>
+  </body>
+</html>
