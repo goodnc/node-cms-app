@@ -9,14 +9,18 @@
   },
   "dependencies": {
     "art-template": "^4.13.4",
+    "bcryptjs": "^3.0.3",
     "config": "^4.4.2",
     "express": "^5.2.1",
     "express-art-template": "^1.0.1",
+    "joi": "^18.2.3",
     "mongoose": "^9.8.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/config": "^4.4.0",
     "@types/express": "^5.0.6",
+    "@types/joi": "^17.2.3",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^26.1.1",
     "tsx": "^4.23.1",

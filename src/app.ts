@@ -8,6 +8,8 @@ import article from "./controllers/article-controller";
 import user from "./controllers/user-controller";
 import login from "./controllers/login-controller";
 
+import "./models/conn";
+
 const app: Application = express();
 app.use(express.static(path.join(__dirname, "public")));
 // 设置模版位置
