@@ -17,8 +17,17 @@ const registerRoutes = (app: Application) => {
   app.post("/register", register);
   app.get("/logout", logout);
 };
+
+// console.log("config：", config);
+console.log("config：", config.get("title"));
+
 // 登录-get
 const loginPage = (req: Request, res: Response) => {
+  //   let pageTitle = "后台管理系统";
+  //   try {
+  //     pageTitle = config.get("title") + "title";
+  //   } catch (err) {}
+  //   res.app.locals.title = pageTitle;
   res.app.locals.title = config.get("title");
   res.render("login");
 };
@@ -41,11 +50,12 @@ const login = async (req: Request, res: Response) => {
       req.session.userInfo = user;
       req.app.locals.userInfo = user;
       if (user.role === "admin") {
-        res.redirect("/admin/user");
+        return res.redirect("/admin/user");
       } else {
-        res.redirect("/");
+        return res.redirect("/");
       }
-      //   res.redirect("/");
+    } else {
+      return res.status(400).render("admin/error", { msg });
     }
   } else {
     // 没有查询到用户
@@ -69,7 +79,7 @@ const register = async (req: Request, res: Response) => {
     $or: [{ email: req.body.email }, { username: req.body.username }],
   });
   if (user) {
-    return res.redirect(`/register`);
+    return res.redirect(`/register?message=用户名或邮箱已被注册`);
   }
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, salt);
@@ -78,7 +88,7 @@ const register = async (req: Request, res: Response) => {
   // 将用户信息添加到数据库中
   await User.create(req.body);
   // 将页面重定向到首页
-  res.redirect("/");
+  return res.redirect("/");
 };
 
 // 登出

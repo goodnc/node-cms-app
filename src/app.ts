@@ -1,8 +1,10 @@
+// process.env.NODE_CONFIG_DIR = "./config";
 import express, { Application } from "express";
 import path from "path";
 // 导入art-template模版引擎
 import template from "art-template";
 import bodyParser from "body-parser";
+import session from "express-session";
 
 // ------这里用routes替代------
 // import home from "./controllers/home-controller";
@@ -26,8 +28,21 @@ app.set("view engine", "art");
 app.engine("art", require("express-art-template"));
 
 // 处理post请求参数
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+// 新增session配置
+app.use(
+  session({
+    secret: "cms-admin-2026", // 自定义密钥
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+  }),
+);
+
+import loginCtrl from "./controllers/login-controller";
+// 3. 执行函数，挂载所有登录相关路由（关键！少这行直接404 POST）
+loginCtrl.registerRoutes(app);
 
 app.listen(8080, () => {
-  console.log("网站服务器启动成功，端口：8080，请访问：http://localhost:8080");
+  console.log("网站服务器启动成功，请访问：http://localhost:8080");
 });
