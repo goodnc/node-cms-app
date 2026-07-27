@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 
 // 引入Joi模块
 import Joi from "joi";
-interface IUser extends Document {
+export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
