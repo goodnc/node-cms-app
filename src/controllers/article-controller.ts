@@ -1,15 +1,17 @@
-import express, { Application, Request, Response, Router } from "express";
-// const article: Router = express.Router();
-// article.get("/", (req: Request, res: Response) => {
-//   // 设置response编码为utf-8
-//   res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-//   res.end("欢迎进入文章管理页面");
+import express, {
+  Application,
+  Request,
+  Response,
+  Router,
+  NextFunction,
+} from "express";
+// const article:Router = express.Router();
+// article.get('/', (req:Request, res:Response) => {
+//   //设置response编码为utf-8
+//   res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
+//   res.end('欢迎进入文章管理页面');
 // });
-
 // export default article;
-// export default {
-//   registerRoutes: (app: Application) => {},
-// };
 
 // 将文章集合的构造函数导入到当前文件中
 import { Article } from "../models/article";
@@ -18,7 +20,6 @@ import formidable from "formidable";
 import path from "path";
 // 导入mongoose-sex-page模块
 const pagination = require("mongoose-sex-page");
-
 //获取表单对象
 export const getFormObj = (fields: any) => {
   const post: any = {};
@@ -62,14 +63,14 @@ const articlePage = async (req: Request, res: Response) => {
     articles: JSON.parse(JSON.stringify(articles)),
   });
 };
-
 const editView = async (req: Request, res: Response) => {
   req.app.locals.currentLink = "article";
   const { id } = req.query;
   // console.log('id :>> ', id);
   if (id) {
-    let article = await Article.findOne({ _id: id });
+    let article = await Article.findOne({ _id: id }).populate("author");
     console.log("article :>> ", article);
+    // 兜底，防止author为null
     res.render("admin/article/edit.art", {
       message: "修改文章",
       article: article,
@@ -100,7 +101,7 @@ const add = async (req: Request, res: Response) => {
       // 3.files 对象类型 保存了和上传文件相关的数据
       // res.send(files.cover.path.split('public')[1])
       const fields = getFormObj(fieldsArr);
-      fields.author = fields.author.replaceAll('"', ""); // new ObjectId(fields.author.replace('"',''));
+      fields.author = fields.author?.replaceAll('"', ""); // new ObjectId(fields.author.replace('"',''));
       await Article.create({
         title: fields.title,
         author: fields.author, // new ObjectId(fields.author),
@@ -116,7 +117,6 @@ const add = async (req: Request, res: Response) => {
   }
   // res.send('ok');
 };
-
 //编辑
 const edit = async (req: Request, res: Response) => {
   // 1.创建表单解析对象
