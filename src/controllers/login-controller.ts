@@ -1,8 +1,7 @@
 import express, { Application, Request, Response, Router } from "express";
 import bcrypt from "bcryptjs";
 import config from "config";
-import modelUser, { type IUser } from "../models/user";
-const { User, validateUser } = modelUser;
+import { User, validateUser, IUser } from "../models/user";
 // import { IUser, User, validateUser } from "../models/user";
 declare module "express-session" {
   interface SessionData {

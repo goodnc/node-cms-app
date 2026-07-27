@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 
 // 引入Joi模块
 import Joi from "joi";
-export interface IUser extends Document {
+interface IUser extends Document {
   username: string;
   email: string;
   password: string;
@@ -88,7 +88,4 @@ const validateUser = (user: IUser) => {
 };
 
 // 将用户集合作为模块成员进行导出
-export default {
-  User,
-  validateUser,
-};
+export { IUser, User, validateUser };
