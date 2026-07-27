@@ -2,11 +2,17 @@ import express, { Application } from "express";
 import path from "path";
 // 导入art-template模版引擎
 import template from "art-template";
+import bodyParser from "body-parser";
 
-import home from "./controllers/home-controller";
-import article from "./controllers/article-controller";
-import user from "./controllers/user-controller";
-import login from "./controllers/login-controller";
+// ------这里用routes替代------
+// import home from "./controllers/home-controller";
+// import article from "./controllers/article-controller";
+// import user from "./controllers/user-controller";
+// import login from "./controllers/login-controller";
+// app.use("/", home);
+// app.use("/article", article);
+// app.use("/user", user);
+// app.use("/login", login);
 
 import "./models/conn";
 
@@ -19,10 +25,8 @@ app.set("view engine", "art");
 // 当渲染后缀为art的模版时，指定所使用的模版引擎是什么
 app.engine("art", require("express-art-template"));
 
-app.use("/", home);
-app.use("/article", article);
-app.use("/user", user);
-app.use("/login", login);
+// 处理post请求参数
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(8080, () => {
   console.log("网站服务器启动成功，端口：8080，请访问：http://localhost:8080");

@@ -1,4 +1,4 @@
-import express, { Request, Response, Router } from "express";
+import express, { Application, Request, Response, Router } from "express";
 const article: Router = express.Router();
 article.get("/", (req: Request, res: Response) => {
   // 设置response编码为utf-8
@@ -6,4 +6,7 @@ article.get("/", (req: Request, res: Response) => {
   res.end("欢迎进入文章管理页面");
 });
 
-export default article;
+// export default article;
+export default {
+  registerRoutes: (app: Application) => {},
+};
