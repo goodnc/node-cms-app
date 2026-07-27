@@ -3,6 +3,9 @@ import express, { Application } from "express";
 import path from "path";
 // 导入art-template模版引擎
 import template from "art-template";
+// 向模版内部导入moment变量，方便在模版中使用moment对象
+import moment from "moment";
+template.defaults.imports.moment = moment;
 import bodyParser from "body-parser";
 import session from "express-session";
 
