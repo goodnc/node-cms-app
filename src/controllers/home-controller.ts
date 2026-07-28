@@ -11,6 +11,12 @@ import express, { Application, Request, Response, Router } from "express";
 //   registerRoutes:(app:Application)=>{},
 // }
 
+import mongoose from "mongoose";
+// 兼容旧版count方法
+mongoose.Query.prototype.count = function () {
+  return this.countDocuments();
+};
+
 import { Article } from "../models/article";
 // 导入评论集合构造函数
 import { Comment } from "../models/comment";
